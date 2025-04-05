@@ -456,6 +456,43 @@
                 </a>
             </div>
         </div>
+
+        <!-- Order Form -->
+        <div class="container" style="margin-top: 3rem;">
+            <h2 class="category-title"><i class="fas fa-shopping-cart"></i> FORM ORDER</h2>
+            <form id="orderForm" style="background: rgba(15, 15, 30, 0.8); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--neon-blue);">
+                <div style="margin-bottom: 1rem;">
+                    <label for="customerName" style="display: block; margin-bottom: 0.5rem;">Nama Pelanggan:</label>
+                    <input type="text" id="customerName" name="customerName" placeholder="Masukkan nama Anda" required tabindex="1" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="serviceType" style="display: block; margin-bottom: 0.5rem;">Pilih Layanan:</label>
+                    <select id="serviceType" name="serviceType" required tabindex="2" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                        <option value="" disabled selected>Pilih layanan...</option>
+                        <option value="jokiLevel">Joki Level</option>
+                        <option value="jokiBelly">Joki Belly</option>
+                        <option value="jokiFragmen">Joki Fragmen</option>
+                        <option value="jokiMasterySword">Joki Mastery Sword</option>
+                        <option value="jokiAwakeningFruit">Joki Awakening Fruit</option>
+                        <option value="jokiFightingStyle">Joki Fighting Style</option>
+                        <option value="jokiRace">Joki Race</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="details" style="display: block; margin-bottom: 0.5rem;">Detail Layanan:</label>
+                    <textarea id="details" name="details" placeholder="Masukkan detail layanan (contoh: V2, V3, V4, Cyborg)" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+                    <small style="color: #aaa;">Contoh detail: "V2", "V3", "V4", "Cyborg". Informasi lebih lengkap dapat dibahas melalui WhatsApp.</small>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="contact" style="display: block; margin-bottom: 0.5rem;">Nomor WhatsApp:</label>
+                    <input type="text" id="contact" name="contact" placeholder="Masukkan nomor WhatsApp Anda" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                </div>
+                <small style="color: #aaa; display: block; margin-top: 1rem;">
+                    📌 Harga akan diinformasikan saat chat melalui WhatsApp.
+                </small>
+                <button type="submit" style="background: var(--neon-blue); padding: 10px 20px; border-radius: 8px; color: white; font-weight: bold; border: none; cursor: pointer; width: 100%;">Kirim Order</button>
+            </form>
+        </div>
     </div>
 
     <!-- WhatsApp Floating Button -->
@@ -466,6 +503,12 @@
         <a href="https://wa.me/6281258837595" class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i> Order via WA 2
         </a>
+    </div>
+
+    <div id="orderSuccessModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15, 15, 30, 0.9); padding: 20px; border-radius: 10px; text-align: center; color: white; z-index: 1000;">
+        <h3>✅ Order Telah Dikirim!</h3>
+        <p>Terima kasih telah menggunakan layanan kami.</p>
+        <button onclick="closeModal()" style="background: var(--neon-blue); padding: 10px 20px; border-radius: 8px; color: white; font-weight: bold; border: none; cursor: pointer;">Tutup</button>
     </div>
 
     <script>
@@ -498,6 +541,147 @@
             hero.style.animation = `glow 2s infinite alternate`;
             document.documentElement.style.setProperty('--neon-red', randomColor);
         }, 3000);
+
+        // Order Form Submission
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const customerName = document.getElementById('customerName').value.trim();
+            const serviceType = document.getElementById('serviceType').value;
+            const details = document.getElementById('details').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+
+            // Validasi nomor kontak
+            if (!isValidPhoneNumber(contact)) {
+                alert('Nomor WhatsApp tidak valid. Harus dimulai dengan 08 dan memiliki panjang 10-14 digit.');
+                return;
+            }
+
+            // Validasi detail layanan
+            if (!isValidDetail(serviceType, details)) {
+                alert('Detail layanan tidak valid. Harap masukkan detail yang sesuai (contoh: V2, V3, V4). Informasi lebih lengkap dapat dibahas melalui WhatsApp.');
+                return;
+            }
+
+            // Kirim ke WhatsApp
+            const orderSummary = `
+                Nama: ${customerName}
+                Layanan: ${serviceType}
+                Detail: ${details}
+                Kontak: ${contact}
+            `;
+            const whatsappMessage = encodeURIComponent(orderSummary);
+            const whatsappURL = `https://wa.me/6283893233950?text=${whatsappMessage}`;
+            window.open(whatsappURL, '_blank');
+
+            // Tampilkan modal sukses
+            document.getElementById('orderSuccessModal').style.display = 'block';
+
+            // Reset form
+            e.target.reset();
+        });
+
+        const priceMapping = {
+            jokiLevel: {
+                "Level 100": "5K",
+                "Level 200": "5K",
+                "Level 500": "5K",
+                "Level 1000": "15K",
+                "Level 1500": "20K",
+                "Level 2000": "35K",
+                "Level 2450": "50K",
+                "Level 2600 (MAX)": "60K"
+            },
+            jokiBelly: {
+                "1M Belly": "5K",
+                "5M Belly": "15K",
+                "10M Belly": "20K",
+                "15M Belly": "25K",
+                "20M Belly": "35K",
+                "30M Belly": "50K",
+                "40M Belly": "65K"
+            },
+            jokiFragmen: {
+                "3.000 Fragmen": "5K",
+                "5.000 Fragmen": "5K",
+                "10.000 Fragmen": "10K",
+                "15.000 Fragmen": "10K",
+                "20.000 Fragmen": "15K",
+                "50.000 Fragmen": "30K"
+            },
+            jokiMasterySword: {
+                "Mastery 100-200": "5K",
+                "Mastery 200-400": "10K",
+                "Mastery 400-600": "15K"
+            },
+            jokiAwakeningFruit: {
+                "Ice Awakened": "15K",
+                "Flame Awakened": "15K",
+                "Light Awakened": "15K",
+                "Quake Awakened": "20K",
+                "Dark Awakened": "15K",
+                "Sand Awakened": "15K",
+                "Magma Awakened": "20K",
+                "Rumble Awakened": "25K",
+                "Phoenix Awakened": "25K",
+                "String Awakened": "25K",
+                "Dough Awakened": "40K"
+            },
+            jokiFightingStyle: {
+                "Death Step": "5K",
+                "Electric Claw": "10K",
+                "Sharkman Karate": "10K",
+                "Superhuman": "10K",
+                "God Human": "15K",
+                "Dragon Talon": "10K"
+            },
+            jokiRace: {
+                "Upgrade Race ke V2": "5K",
+                "Upgrade Race ke V3": "10K",
+                "Upgrade Race ke V4": "40K"
+            }
+        };
+
+        document.getElementById('serviceType').addEventListener('change', function () {
+            const selectedService = this.value;
+
+            // Reset detail dan estimasi harga
+            document.getElementById('details').value = "";
+            document.getElementById('priceEstimate').value = "Masukkan detail layanan";
+        });
+
+        document.getElementById('details').addEventListener('input', function () {
+            const serviceType = document.getElementById('serviceType').value;
+            const detail = this.value.trim();
+
+            // Pastikan serviceType dipilih
+            if (!serviceType) {
+                document.getElementById('priceEstimate').value = "Pilih layanan terlebih dahulu";
+                return;
+            }
+
+            // Ambil harga dari priceMapping
+            const priceEstimate = priceMapping[serviceType]?.[detail] || "Detail tidak valid";
+            document.getElementById('priceEstimate').value = priceEstimate;
+        });
+
+        function closeModal() {
+            document.getElementById('orderSuccessModal').style.display = 'none';
+        }
+
+        function isValidPhoneNumber(phone) {
+            const phoneRegex = /^08\d{8,12}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function isValidDetail(serviceType, detail) {
+            const validDetails = priceMapping[serviceType];
+            if (!validDetails) return false;
+
+            // Periksa apakah detail cocok dengan salah satu kunci di validDetails
+            const normalizedDetail = detail.toLowerCase().trim();
+            return Object.keys(validDetails).some(key => key.toLowerCase().includes(normalizedDetail));
+        }
     </script>
 </body>
 </html>
