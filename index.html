@@ -559,11 +559,21 @@
 
             // Validasi detail layanan
             if (!isValidDetail(serviceType, details)) {
-                alert('Detail layanan tidak valid. Harap masukkan detail yang sesuai (contoh: V2, V3, V4). Informasi lebih lengkap dapat dibahas melalui WhatsApp.');
+                const invalidMessage = `
+                    Nama: ${customerName}
+                    Layanan: ${serviceType}
+                    Detail: ${details}
+                    Kontak: ${contact}
+                    
+    
+                `;
+                const whatsappMessage = encodeURIComponent(invalidMessage);
+                const whatsappURL = `https://wa.me/6283893233950?text=${whatsappMessage}`;
+                window.open(whatsappURL, '_blank');
                 return;
             }
 
-            // Kirim ke WhatsApp
+            // Kirim ke WhatsApp jika semua validasi berhasil
             const orderSummary = `
                 Nama: ${customerName}
                 Layanan: ${serviceType}
