@@ -20,7 +20,7 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #23243a 0%, #181824 100%);
             color: #fff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', Arial, Helvetica, sans-serif;
             overflow-x: hidden;
         }
         .container {
@@ -100,6 +100,7 @@
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
             transition: all 0.3s;
+            font-size: 1.08em;
         }
         .whatsapp-btn:hover {
             transform: scale(1.1) translateY(-5px);
@@ -112,16 +113,109 @@
             font-size: 0.8rem;
             margin-left: 10px;
         }
+        /* Intro Splash */
+        #introSplash {
+            position: fixed;
+            z-index: 99999;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #181824 0%, #23243a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.7s;
+            animation: fadeIn 1s;
+        }
+        #introSplash .intro-content {
+            text-align: center;
+            color: #fff;
+            animation: popIn 1.2s cubic-bezier(.4,2,.6,1);
+        }
+        #introSplash .luxury-logo {
+            font-size: 3.5em;
+            color: #fbbf24;
+            text-shadow: 0 0 24px #fbbf24, 0 0 60px #05d9e8;
+            margin-bottom: 18px;
+            animation: shine 2.5s infinite alternate;
+        }
+        #introSplash h1 {
+            font-size: 2.3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fbbf24;
+            text-shadow: 0 2px 18px #05d9e8, 0 0 8px #23243a;
+            margin-bottom: 10px;
+        }
+        #introSplash p {
+            font-size: 1.18em;
+            color: #e0e7ef;
+            margin-bottom: 22px;
+            text-shadow: 0 2px 8px #23243a;
+        }
+        #introSplash .intro-bar {
+            width: 220px;
+            height: 14px;
+            background: #fff3;
+            border-radius: 10px;
+            margin: 24px auto 0 auto;
+            overflow: hidden;
+            box-shadow: 0 2px 8px #fbbf2444;
+        }
+        #introSplash .intro-bar-inner {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #fbbf24, #05d9e8, #d300c5);
+            border-radius: 10px;
+            animation: introBarAnim 2.2s linear forwards;
+        }
+        @keyframes introBarAnim {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            80% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @keyframes shine {
+            from { text-shadow: 0 0 24px #fbbf24, 0 0 60px #05d9e8; }
+            to { text-shadow: 0 0 48px #fbbf24, 0 0 120px #d300c5; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Hide scroll when intro active */
+        body.intro-active {
+            overflow: hidden !important;
+        }
         /* Responsive */
+        @media (max-width: 1200px) {
+            .container { max-width: 98vw; }
+        }
         @media (max-width: 900px) {
             .price-grid { grid-template-columns: 1fr; }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .container { padding: 1rem 2vw 2rem 2vw; }
             .hero { font-size: 1.1em; }
             .price-card { padding: 1.2rem 0.7rem 1rem 0.7rem; }
             .category-title { font-size: 1.1rem; }
             .whatsapp-float { right: 10px; bottom: 10px; }
+            #introSplash h1 { font-size: 1.3em; }
+            #introSplash p { font-size: 1em; }
+        }
+        @media (max-width: 480px) {
+            html, body { font-size: 15px; }
+            .container { padding: 0.5rem 1vw 1rem 1vw; }
+            .hero { font-size: 1em; }
+            .price-card { padding: 0.7rem 0.3rem 0.7rem 0.3rem; }
+            .category-title { font-size: 1em; }
+            .whatsapp-btn { font-size: 0.98em; padding: 10px 12px; }
+            #introSplash .luxury-logo { font-size: 2em; }
+            #introSplash h1 { font-size: 1em; }
+            #introSplash p { font-size: 0.95em; }
+            #introSplash .intro-bar { width: 140px; height: 10px; }
         }
         /* Order Form */
         .order-form-card {
@@ -222,227 +316,257 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="hero">
-            <h1>📌 JASA JOKI BLOX FRUITS - HACK STORE 📌</h1>
-            <p>🔥 Cepat - Aman - Terpercaya 🔥</p>
+<body class="intro-active">
+    <!-- Intro Splash -->
+    <div id="introSplash">
+        <div class="intro-content">
+            <div class="luxury-logo">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h1>HACK STORE JOKI BLOX FRUITS</h1>
+            <p>
+                <span style="color:#fbbf24;font-weight:bold;">VIP Service</span> | <span style="color:#05d9e8;">Fast</span> | <span style="color:#d300c5;">Trusted</span>
+                <br>
+                <span style="font-size:1.08em;">Rasakan pengalaman joki <b>premium</b> dengan pelayanan <b>eksklusif</b>, harga terjangkau, dan keamanan maksimal.<br>
+                <span style="color:#fbbf24;">Order sekarang dan buktikan sendiri kemewahan layanan kami!</span></span>
+            </p>
+            <div class="intro-bar"><div class="intro-bar-inner"></div></div>
         </div>
-        <div style="text-align: center; margin-top: 3rem;">
-            <h2 style="color: var(--neon-purple);">🎮 Coba Game Buatan Kami!</h2>
-            <iframe frameborder="0" 
-                src="https://itch.io/embed/3386290?border_width=0&amp;border_color=000000" 
-                width="550" height="165"
-                style="max-width: 98vw;">
-                <a href="https://xobe-development.itch.io/tebakx-the-ultimate-number-challenge">
-                    🔥 TebakX 🔥 by XOBE DEVELOPMENT
-                </a>
-            </iframe>
-        </div>
-        <!-- Level Joki -->
-        <div class="price-grid">
-            <div class="price-card">
-                <h3 class="category-title"><i class="fas fa-level-up-alt"></i> JOKI LEVEL</h3>
-                <div class="price-item"><span>Level 100</span><span>5K</span></div>
-                <div class="price-item"><span>Level 200</span><span>5K</span></div>
-                <div class="price-item"><span>Level 500</span><span>5K</span></div>
-                <div class="price-item"><span>Level 1000</span><span>15K</span></div>
-                <div class="price-item"><span>Level 1500</span><span>20K</span></div>
-                <div class="price-item"><span>Level 2000</span><span>35K</span></div>
-                <div class="price-item"><span>Level 2450</span><span>50K</span></div>
-                <div class="price-item"><span>Level 2600 (MAX)</span><span>60K</span></div>
+    </div>
+    <div id="mainContent" style="display:none;">
+        <div class="container">
+            <div class="hero">
+                <h1>📌 JASA JOKI BLOX FRUITS - HACK STORE 📌</h1>
+                <p>🔥 Cepat - Aman - Terpercaya 🔥</p>
             </div>
-            <div class="price-card">
-                <h3 class="category-title"><i class="fas fa-coins"></i> JOKI BELLY</h3>
-                <div class="price-item"><span>1M Belly</span><span>5K</span></div>
-                <div class="price-item"><span>5M Belly</span><span>15K</span></div>
-                <div class="price-item"><span>10M Belly</span><span>20K</span></div>
-                <div class="price-item"><span>15M Belly</span><span>25K</span></div>
-                <div class="price-item"><span>20M Belly</span><span>35K</span></div>
-                <div class="price-item"><span>30M Belly</span><span>50K</span></div>
-                <div class="price-item"><span>40M Belly</span><span>65K</span></div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <h2 style="color: var(--neon-purple);">🎮 Coba Game Buatan Kami!</h2>
+                <iframe frameborder="0" 
+                    src="https://itch.io/embed/3386290?border_width=0&amp;border_color=000000" 
+                    width="550" height="165"
+                    style="max-width: 98vw;">
+                    <a href="https://xobe-development.itch.io/tebakx-the-ultimate-number-challenge">
+                        🔥 TebakX 🔥 by XOBE DEVELOPMENT
+                    </a>
+                </iframe>
             </div>
-            <div class="price-card">
-                <h3 class="category-title"><i class="fas fa-gem"></i> JOKI FRAGMEN</h3>
-                <div class="price-item"><span>3.000 Fragmen</span><span>5K</span></div>
-                <div class="price-item"><span>5.000 Fragmen</span><span>5K</span></div>
-                <div class="price-item"><span>10.000 Fragmen</span><span>10K</span></div>
-                <div class="price-item"><span>15.000 Fragmen</span><span>10K</span></div>
-                <div class="price-item"><span>20.000 Fragmen</span><span>15K</span></div>
-                <div class="price-item"><span>50.000 Fragmen</span><span>30K</span></div>
-                <div class="price-item note">
-                    <small>📌 Pastikan memiliki banyak fruit jelek untuk ditukar menjadi chip</small>
-                </div>
-            </div>
-        </div>
-        <!-- Mastery Sword -->
-        <h2 class="category-title"><i class="fas fa-swords"></i> JOKI MASTERY SWORD</h2>
-        <div class="price-grid">
-            <div class="price-card">
-                <h3 class="category-title">Mastery 100-200</h3>
-                <div class="price-item"><span>Saber</span><span>5K</span></div>
-                <div class="price-item"><span>Rengoku</span><span>5K</span></div>
-                <div class="price-item"><span>Shisui</span><span>5K</span></div>
-                <div class="price-item"><span>Wando</span><span>5K</span></div>
-                <div class="price-item"><span>Spikey Trident</span><span>5K</span></div>
-                <div class="price-item"><span>Gravity Cane</span><span>5K</span></div>
-                <div class="price-item"><span>Twin Hooks</span><span>5K</span></div>
-            </div>
-            <div class="price-card">
-                <h3 class="category-title">Mastery 200-400</h3>
-                <div class="price-item"><span>Dark Dagger</span><span>5K</span></div>
-                <div class="price-item"><span>Tushita</span><span>10K</span></div>
-                <div class="price-item"><span>Yama</span><span>10K</span></div>
-                <div class="price-item"><span>Buddy Sword</span><span>10K</span></div>
-                <div class="price-item"><span>Hallow Scythe</span><span>10K</span></div>
-                <div class="price-item"><span>True Triple Katana</span><span>10K</span></div>
-                <div class="price-item"><span>Cursed Dual Katana</span><span>15K</span></div>
-            </div>
-            <div class="price-card">
-                <h3 class="category-title">Mastery 400-600</h3>
-                <div class="price-item"><span>Midnight Blade</span><span>10K</span></div>
-                <div class="price-item"><span>Pole (2nd Form)</span><span>15K</span></div>
-                <div class="price-item"><span>Cursed Dual Katana</span><span>20K</span></div>
-                <div class="price-item"><span>True Triple Katana</span><span>20K</span></div>
-                <div class="price-item"><span>Hallow Scythe</span><span>15K</span></div>
-            </div>
-        </div>
-        <!-- Awakening Fruit -->
-        <h2 class="category-title"><i class="fas fa-fire"></i> JOKI AWAKENING FRUIT</h2>
-        <div class="price-grid">
-            <div class="price-card">
-                <div class="price-item"><span>Ice Awakened</span><span>15K</span></div>
-                <div class="price-item"><span>Flame Awakened</span><span>15K</span></div>
-                <div class="price-item"><span>Light Awakened</span><span>15K</span></div>
-                <div class="price-item"><span>Quake Awakened</span><span>20K</span></div>
-                <div class="price-item"><span>Dark Awakened</span><span>15K</span></div>
-                <div class="price-item"><span>Sand Awakened</span><span>15K</span></div>
-            </div>
-            <div class="price-card">
-                <div class="price-item"><span>Magma Awakened</span><span>20K</span></div>
-                <div class="price-item"><span>Rumble Awakened</span><span>25K</span></div>
-                <div class="price-item"><span>Phoenix Awakened</span><span>25K</span></div>
-                <div class="price-item"><span>String Awakened</span><span>25K</span></div>
-                <div class="price-item"><span>Dough Awakened</span><span>40K</span></div>
-            </div>
-        </div>
-        <!-- Fighting Style -->
-        <h2 class="category-title"><i class="fas fa-fist-raised"></i> JOKI FIGHTING STYLE</h2>
-        <div class="price-grid">
-            <div class="price-card">
-                <div class="price-item"><span>Death Step</span><span>5K</span></div>
-                <div class="price-item"><span>Electric Claw</span><span>10K</span></div>
-                <div class="price-item"><span>Sharkman Karate</span><span>10K</span></div>
-                <div class="price-item"><span>Superhuman</span><span>10K</span></div>
-                <div class="price-item"><span>God Human</span><span>15K</span></div>
-                <div class="price-item"><span>Dragon Talon</span><span>10K</span></div>
-            </div>
-        </div>
-        <!-- Race -->
-        <h2 class="category-title"><i class="fas fa-running"></i> JOKI RACE</h2>
-        <div class="price-grid">
-            <div class="price-card">
-                <div class="price-item"><span>Upgrade Race ke V2</span><span>5K</span></div>
-                <div class="price-item"><span>Upgrade Race ke V3</span><span>10K</span></div>
-                <div class="price-item"><span>Upgrade Race ke V4</span><span>40K</span></div>
-            </div>
-        </div>
-        <!-- Warning Section -->
-        <div class="price-card" style="background: rgba(255,0,0,0.1); border-color: var(--neon-red); margin-top: 3rem;">
-            <h3 class="category-title"><i class="fas fa-exclamation-triangle"></i> PERINGATAN & KEAMANAN</h3>
-            <ul style="padding-left: 1.5rem;">
-                <li style="margin-bottom: 10px;">✅ Admin tidak bertanggung jawab jika akun terkena banned atau di-hack.</li>
-                <li style="margin-bottom: 10px;">✅ Kami tidak meminta password! Login hanya menggunakan kode OTP yang dikirim ke email buyer.</li>
-                <li style="margin-bottom: 10px;">✅ Pastikan akun Roblox yang mau dijoki memiliki email aktif yang bisa diakses.</li>
-                <li style="margin-bottom: 10px;">⚠️ Setiap penjoki hanya menerima 2-3 orderan untuk menjaga kualitas layanan.</li>
-            </ul>
-        </div>
-        <!-- Why Choose Us -->
-        <div class="price-card" style="background: rgba(5,217,232,0.1); margin-top: 2rem;">
-            <h3 class="category-title"><i class="fas fa-star"></i> KENAPA HARUS JOKI DI SINI?</h3>
+            <!-- Level Joki -->
             <div class="price-grid">
-                <div>
-                    <div class="price-item"><span><i class="fas fa-bolt"></i> Cepat</span><span>Pengerjaan kilat</span></div>
-                    <div class="price-item"><span><i class="fas fa-shield-alt"></i> Aman</span><span>Tanpa password</span></div>
+                <div class="price-card">
+                    <h3 class="category-title"><i class="fas fa-level-up-alt"></i> JOKI LEVEL</h3>
+                    <div class="price-item"><span>Level 100</span><span>5K</span></div>
+                    <div class="price-item"><span>Level 200</span><span>5K</span></div>
+                    <div class="price-item"><span>Level 500</span><span>5K</span></div>
+                    <div class="price-item"><span>Level 1000</span><span>15K</span></div>
+                    <div class="price-item"><span>Level 1500</span><span>20K</span></div>
+                    <div class="price-item"><span>Level 2000</span><span>35K</span></div>
+                    <div class="price-item"><span>Level 2450</span><span>50K</span></div>
+                    <div class="price-item"><span>Level 2600 (MAX)</span><span>60K</span></div>
                 </div>
-                <div>
-                    <div class="price-item"><span><i class="fas fa-clock"></i> Efisien</span><span>Kamu santai</span></div>
-                    <div class="price-item"><span><i class="fas fa-hourglass-half"></i> Hemat Waktu</span><span>Tak perlu grinding</span></div>
+                <div class="price-card">
+                    <h3 class="category-title"><i class="fas fa-coins"></i> JOKI BELLY</h3>
+                    <div class="price-item"><span>1M Belly</span><span>5K</span></div>
+                    <div class="price-item"><span>5M Belly</span><span>15K</span></div>
+                    <div class="price-item"><span>10M Belly</span><span>20K</span></div>
+                    <div class="price-item"><span>15M Belly</span><span>25K</span></div>
+                    <div class="price-item"><span>20M Belly</span><span>35K</span></div>
+                    <div class="price-item"><span>30M Belly</span><span>50K</span></div>
+                    <div class="price-item"><span>40M Belly</span><span>65K</span></div>
+                </div>
+                <div class="price-card">
+                    <h3 class="category-title"><i class="fas fa-gem"></i> JOKI FRAGMEN</h3>
+                    <div class="price-item"><span>3.000 Fragmen</span><span>5K</span></div>
+                    <div class="price-item"><span>5.000 Fragmen</span><span>5K</span></div>
+                    <div class="price-item"><span>10.000 Fragmen</span><span>10K</span></div>
+                    <div class="price-item"><span>15.000 Fragmen</span><span>10K</span></div>
+                    <div class="price-item"><span>20.000 Fragmen</span><span>15K</span></div>
+                    <div class="price-item"><span>50.000 Fragmen</span><span>30K</span></div>
+                    <div class="price-item note">
+                        <small>📌 Pastikan memiliki banyak fruit jelek untuk ditukar menjadi chip</small>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Contact -->
-        <div style="text-align: center; margin: 3rem 0;">
-            <h3>📞 HUBUNGI KAMI SEKARANG!</h3>
-            <p>Setiap penjoki hanya menerima 2-3 orderan saja!</p>
-            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-                <a href="https://wa.me/6283141707524" style="background: var(--neon-purple); padding: 10px 20px; border-radius: 50px; color: white; text-decoration: none;">
-                    <i class="fab fa-whatsapp"></i> Admin 1 (083141707524)
-                </a>
-                <a href="https://wa.me/6281258837595 style="background: var(--neon-blue); padding: 10px 20px; border-radius: 50px; color: white; text-decoration: none;">
-                    <i class="fab fa-whatsapp"></i> Admin 2(081258837595)
-                </a>
+            <!-- Mastery Sword -->
+            <h2 class="category-title"><i class="fas fa-swords"></i> JOKI MASTERY SWORD</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <h3 class="category-title">Mastery 100-200</h3>
+                    <div class="price-item"><span>Saber</span><span>5K</span></div>
+                    <div class="price-item"><span>Rengoku</span><span>5K</span></div>
+                    <div class="price-item"><span>Shisui</span><span>5K</span></div>
+                    <div class="price-item"><span>Wando</span><span>5K</span></div>
+                    <div class="price-item"><span>Spikey Trident</span><span>5K</span></div>
+                    <div class="price-item"><span>Gravity Cane</span><span>5K</span></div>
+                    <div class="price-item"><span>Twin Hooks</span><span>5K</span></div>
+                </div>
+                <div class="price-card">
+                    <h3 class="category-title">Mastery 200-400</h3>
+                    <div class="price-item"><span>Dark Dagger</span><span>5K</span></div>
+                    <div class="price-item"><span>Tushita</span><span>10K</span></div>
+                    <div class="price-item"><span>Yama</span><span>10K</span></div>
+                    <div class="price-item"><span>Buddy Sword</span><span>10K</span></div>
+                    <div class="price-item"><span>Hallow Scythe</span><span>10K</span></div>
+                    <div class="price-item"><span>True Triple Katana</span><span>10K</span></div>
+                    <div class="price-item"><span>Cursed Dual Katana</span><span>15K</span></div>
+                </div>
+                <div class="price-card">
+                    <h3 class="category-title">Mastery 400-600</h3>
+                    <div class="price-item"><span>Midnight Blade</span><span>10K</span></div>
+                    <div class="price-item"><span>Pole (2nd Form)</span><span>15K</span></div>
+                    <div class="price-item"><span>Cursed Dual Katana</span><span>20K</span></div>
+                    <div class="price-item"><span>True Triple Katana</span><span>20K</span></div>
+                    <div class="price-item"><span>Hallow Scythe</span><span>15K</span></div>
+                </div>
+            </div>
+            <!-- Awakening Fruit -->
+            <h2 class="category-title"><i class="fas fa-fire"></i> JOKI AWAKENING FRUIT</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-item"><span>Ice Awakened</span><span>15K</span></div>
+                    <div class="price-item"><span>Flame Awakened</span><span>15K</span></div>
+                    <div class="price-item"><span>Light Awakened</span><span>15K</span></div>
+                    <div class="price-item"><span>Quake Awakened</span><span>20K</span></div>
+                    <div class="price-item"><span>Dark Awakened</span><span>15K</span></div>
+                    <div class="price-item"><span>Sand Awakened</span><span>15K</span></div>
+                </div>
+                <div class="price-card">
+                    <div class="price-item"><span>Magma Awakened</span><span>20K</span></div>
+                    <div class="price-item"><span>Rumble Awakened</span><span>25K</span></div>
+                    <div class="price-item"><span>Phoenix Awakened</span><span>25K</span></div>
+                    <div class="price-item"><span>String Awakened</span><span>25K</span></div>
+                    <div class="price-item"><span>Dough Awakened</span><span>40K</span></div>
+                </div>
+            </div>
+            <!-- Fighting Style -->
+            <h2 class="category-title"><i class="fas fa-fist-raised"></i> JOKI FIGHTING STYLE</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-item"><span>Death Step</span><span>5K</span></div>
+                    <div class="price-item"><span>Electric Claw</span><span>10K</span></div>
+                    <div class="price-item"><span>Sharkman Karate</span><span>10K</span></div>
+                    <div class="price-item"><span>Superhuman</span><span>10K</span></div>
+                    <div class="price-item"><span>God Human</span><span>15K</span></div>
+                    <div class="price-item"><span>Dragon Talon</span><span>10K</span></div>
+                </div>
+            </div>
+            <!-- Race -->
+            <h2 class="category-title"><i class="fas fa-running"></i> JOKI RACE</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-item"><span>Upgrade Race ke V2</span><span>5K</span></div>
+                    <div class="price-item"><span>Upgrade Race ke V3</span><span>10K</span></div>
+                    <div class="price-item"><span>Upgrade Race ke V4</span><span>40K</span></div>
+                </div>
+            </div>
+            <!-- Warning Section -->
+            <div class="price-card" style="background: rgba(255,0,0,0.1); border-color: var(--neon-red); margin-top: 3rem;">
+                <h3 class="category-title"><i class="fas fa-exclamation-triangle"></i> PERINGATAN & KEAMANAN</h3>
+                <ul style="padding-left: 1.5rem;">
+                    <li style="margin-bottom: 10px;">✅ Admin tidak bertanggung jawab jika akun terkena banned atau di-hack.</li>
+                    <li style="margin-bottom: 10px;">✅ Kami tidak meminta password! Login hanya menggunakan kode OTP yang dikirim ke email buyer.</li>
+                    <li style="margin-bottom: 10px;">✅ Pastikan akun Roblox yang mau dijoki memiliki email aktif yang bisa diakses.</li>
+                    <li style="margin-bottom: 10px;">⚠️ Setiap penjoki hanya menerima 2-3 orderan untuk menjaga kualitas layanan.</li>
+                </ul>
+            </div>
+            <!-- Why Choose Us -->
+            <div class="price-card" style="background: rgba(5,217,232,0.1); margin-top: 2rem;">
+                <h3 class="category-title"><i class="fas fa-star"></i> KENAPA HARUS JOKI DI SINI?</h3>
+                <div class="price-grid">
+                    <div>
+                        <div class="price-item"><span><i class="fas fa-bolt"></i> Cepat</span><span>Pengerjaan kilat</span></div>
+                        <div class="price-item"><span><i class="fas fa-shield-alt"></i> Aman</span><span>Tanpa password</span></div>
+                    </div>
+                    <div>
+                        <div class="price-item"><span><i class="fas fa-clock"></i> Efisien</span><span>Kamu santai</span></div>
+                        <div class="price-item"><span><i class="fas fa-hourglass-half"></i> Hemat Waktu</span><span>Tak perlu grinding</span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact -->
+            <div style="text-align: center; margin: 3rem 0;">
+                <h3>📞 HUBUNGI KAMI SEKARANG!</h3>
+                <p>Setiap penjoki hanya menerima 2-3 orderan saja!</p>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <a href="https://wa.me/6283141707524" style="background: var(--neon-purple); padding: 10px 20px; border-radius: 50px; color: white; text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> Admin 1 (083141707524)
+                    </a>
+                    <a href="https://wa.me/6283141707524" style="background: var(--neon-blue); padding: 10px 20px; border-radius: 50px; color: white; text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> Forum Order (083141707524)
+                    </a>
+                </div>
+            </div>
+            <!-- Order Form -->
+            <div class="order-form-card">
+                <h2 class="category-title"><i class="fas fa-shopping-cart"></i> FORM ORDER</h2>
+                <form id="orderForm">
+                    <div>
+                        <label for="customerName">Nama Pelanggan:</label>
+                        <input type="text" id="customerName" name="customerName" placeholder="Masukkan nama Anda" required tabindex="1">
+                    </div>
+                    <div>
+                        <label for="serviceType">Pilih Jenis Joki:</label>
+                        <select id="serviceType" name="serviceType" required tabindex="2">
+                            <option value="" disabled selected>Pilih layanan...</option>
+                            <option value="Joki Level">Joki Level</option>
+                            <option value="Joki Belly">Joki Belly</option>
+                            <option value="Joki Fragmen">Joki Fragmen</option>
+                            <option value="Joki Mastery Sword">Joki Mastery Sword</option>
+                            <option value="Joki Awakening Fruit">Joki Awakening Fruit</option>
+                            <option value="Joki Fighting Style">Joki Fighting Style</option>
+                            <option value="Joki Race">Joki Race</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="details">Detail Layanan:</label>
+                        <textarea id="details" name="details" placeholder="Masukkan detail layanan (contoh: Level 1000, 10M Belly, Saber, V3, dll)" required></textarea>
+                        <small>Contoh detail: "Level 1000", "10M Belly", "Saber", "V3", dsb. Info lengkap bisa chat WA.</small>
+                    </div>
+                    <div>
+                        <label for="contact">Nomor WhatsApp:</label>
+                        <input type="text" id="contact" name="contact" placeholder="Masukkan nomor WhatsApp Anda" required>
+                    </div>
+                    <small>📌 Harga akan diinformasikan saat chat melalui WhatsApp.</small>
+                    <button type="submit">Kirim Order</button>
+                </form>
             </div>
         </div>
-        <!-- Order Form -->
-        <div class="order-form-card">
-            <h2 class="category-title"><i class="fas fa-shopping-cart"></i> FORM ORDER</h2>
-            <form id="orderForm">
-                <div>
-                    <label for="customerName">Nama Pelanggan:</label>
-                    <input type="text" id="customerName" name="customerName" placeholder="Masukkan nama Anda" required tabindex="1">
-                </div>
-                <div>
-                    <label for="serviceType">Pilih Jenis Joki:</label>
-                    <select id="serviceType" name="serviceType" required tabindex="2">
-                        <option value="" disabled selected>Pilih layanan...</option>
-                        <option value="Joki Level">Joki Level</option>
-                        <option value="Joki Belly">Joki Belly</option>
-                        <option value="Joki Fragmen">Joki Fragmen</option>
-                        <option value="Joki Mastery Sword">Joki Mastery Sword</option>
-                        <option value="Joki Awakening Fruit">Joki Awakening Fruit</option>
-                        <option value="Joki Fighting Style">Joki Fighting Style</option>
-                        <option value="Joki Race">Joki Race</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="details">Detail Layanan:</label>
-                    <textarea id="details" name="details" placeholder="Masukkan detail layanan (contoh: Level 1000, 10M Belly, Saber, V3, dll)" required></textarea>
-                    <small>Contoh detail: "Level 1000", "10M Belly", "Saber", "V3", dsb. Info lengkap bisa chat WA.</small>
-                </div>
-                <div>
-                    <label for="contact">Nomor WhatsApp:</label>
-                    <input type="text" id="contact" name="contact" placeholder="Masukkan nomor WhatsApp Anda" required>
-                </div>
-                <small>📌 Harga akan diinformasikan saat chat melalui WhatsApp.</small>
-                <button type="submit">Kirim Order</button>
-            </form>
+        <!-- WhatsApp Floating Button -->
+        <div class="whatsapp-float">
+            <a href="https://wa.me/6283893233950" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Order via WA 1
+            </a>
+            <a href="https://wa.me/6281258837595" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Admin 2 (081258837595)
+            </a>
+            <a href="https://www.whatsapp.com/channel/0029VajUJEH5Ui2P1ArizJ0V" class="whatsapp-btn" style="background: linear-gradient(135deg,#25d366,#fbbf24);color:#23243a;font-weight:bold;" target="_blank">
+                <i class="fab fa-whatsapp"></i> Gabung Channel Testimoni ⭐
+            </a>
         </div>
-    </div>
-    <!-- WhatsApp Floating Button -->
-    <div class="whatsapp-float">
-        <a href="https://wa.me/6283141707524" class="whatsapp-btn">
-            <i class="fab fa-whatsapp"></i> Order via WA Admin 1
-        </a>
-        <a href="https://wa.me/6281258837595" class="whatsapp-btn">
-            <i class="fab fa-whatsapp"></i> Order via WA Admin 2 (081258837595)
-        </a>
-        <a href="https://www.whatsapp.com/channel/0029VajUJEH5Ui2P1ArizJ0V" class="whatsapp-btn" style="background: linear-gradient(135deg,#25d366,#fbbf24);color:#23243a;font-weight:bold;" target="_blank">
-            <i class="fab fa-whatsapp"></i> Gabung Channel Testimoni ⭐
-        </a>
-    </div>
-    <div id="orderSuccessModal">
-        <h3>✅ Order Telah Dikirim!</h3>
-        <p>Terima kasih telah menggunakan layanan kami.</p>
-        <button onclick="closeModal()">Tutup</button>
-    </div>
-    <div style="text-align:center;margin:2.5rem 0 1.5rem 0;">
-        <a href="https://www.whatsapp.com/channel/0029VajUJEH5Ui2P1ArizJ0V" target="_blank" style="display:inline-block;background:linear-gradient(90deg,#fbbf24,#25d366);color:#23243a;font-weight:bold;padding:14px 32px;border-radius:32px;font-size:1.15em;text-decoration:none;box-shadow:0 2px 12px #25d36644;">
-            ⭐ Lihat Testimoni & Bukti Real Order di Channel WhatsApp Kami!<br>
-            <span style="font-size:0.95em;">Join sekarang, dapatkan info promo, bukti order asli, dan testimoni pelanggan!</span>
-        </a>
+        <div id="orderSuccessModal">
+            <h3>✅ Order Telah Dikirim!</h3>
+            <p>Terima kasih telah menggunakan layanan kami.</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+        <div style="text-align:center;margin:2.5rem 0 1.5rem 0;">
+            <a href="https://www.whatsapp.com/channel/0029VajUJEH5Ui2P1ArizJ0V" target="_blank" style="display:inline-block;background:linear-gradient(90deg,#fbbf24,#25d366);color:#23243a;font-weight:bold;padding:14px 32px;border-radius:32px;font-size:1.15em;text-decoration:none;box-shadow:0 2px 12px #25d36644;">
+                ⭐ Lihat Testimoni & Bukti Real Order di Channel WhatsApp Kami!<br>
+                <span style="font-size:0.95em;">Join sekarang, dapatkan info promo, bukti order asli, dan testimoni pelanggan!</span>
+            </a>
+        </div>
     </div>
     <script>
+        // Intro Splash auto close & tampilkan mainContent
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('introSplash').style.opacity = 0;
+                setTimeout(function() {
+                    document.getElementById('introSplash').style.display = 'none';
+                    document.body.classList.remove('intro-active');
+                    document.getElementById('mainContent').style.display = 'block';
+                }, 700);
+            }, 2600);
+        });
+
         // 3D Hover Effect
         document.addEventListener('mousemove', function(e) {
             const cards = document.querySelectorAll('.price-card');
